@@ -27,11 +27,19 @@ public:
             res.insert(insertVec);
             return;
         }
+        while( i+1 < nums.size() && nums[i] == nums[i+1])
+        {
+            i++;
+        }
+
         resMp[nums[i]]++;
         temp.push_back(nums[i]);
+
         solve(nums,res,temp,i,total+nums[i],target,test,resMp);
+        
         resMp[nums[i]]--;
         temp.pop_back();
+        
         solve(nums,res,temp,i+1,total,target,test,resMp);
     }
     
@@ -43,6 +51,7 @@ public:
         }
         set<vector<int>> st;
         vector<int> temp;
+        sort(candidates.begin(),candidates.end());
         solve(candidates,st,temp,0,0,target,test,resMp);
 
         vector<vector<int>> res;
